@@ -34,9 +34,9 @@ jobs:
             if (!pr) {
               core.setFailed("No matching PR found for this commit.");
             } else {
-              // Extract tag from PR title (assumes tag is like v0.0.1)
+              // Extract tag from PR title (assumes tag is like 0.0.1)
               const pr_title = pr.title;
-              const tag = pr_title.match(/v\d+\.\d+\.\d+/);
+              const tag = pr_title.match(/\d+\.\d+\.\d+/);
               if (!tag) {
                 core.setFailed("No valid tag found in the PR title.");
               } else {
