@@ -1,0 +1,23 @@
+name: Create release
+
+on:
+  push:
+    branches: [ "release" ]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release pushed tag
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Create artifacts
+      run: touch ./dummy.txt
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: 0.0.1
+        name: Test Release
+        body: Test Release Body
+        artifacts: ./dummy.txt
