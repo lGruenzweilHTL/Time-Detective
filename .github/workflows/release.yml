@@ -10,13 +10,13 @@ permissions:
 
 jobs:
   release:
-    name: Release on push to release branch
+    name: Release with PR title as tag
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get PR body
+      - name: Get PR title and extract tag
         id: get_pr
         uses: actions/github-script@v7
         with:
@@ -27,14 +27,22 @@ jobs:
               state: "closed",
               sort: "updated",
               direction: "desc",
-              per_page: 1,
+              per_page: 5
             });
 
             const pr = prs.data.find(pr => pr.merge_commit_sha === context.sha);
             if (!pr) {
               core.setFailed("No matching PR found for this commit.");
             } else {
-              core.setOutput("body", pr.body || "No PR body provided.");
+              // Extract tag from PR title (assumes tag is like v0.0.1)
+              const pr_title = pr.title;
+              const tag = pr_title.match(/v\d+\.\d+\.\d+/);
+              if (!tag) {
+                core.setFailed("No valid tag found in the PR title.");
+              } else {
+                core.setOutput("tag", tag[0]);  // Set extracted tag as output
+                core.setOutput("body", pr.body || "No PR body provided.");
+              }
             }
 
       - name: Create artifacts
@@ -50,7 +58,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          tag: 0.0.1
-          name: Test Release
-          body: ${{ steps.get_pr.outputs.body }}
+          tag: ${{ steps.get_pr.outputs.tag }}   # Use tag from PR title
+          name: ${{ steps.get_pr.outputs.tag }}  # Use tag as release title
+          body: ${{ steps.get_pr.outputs.body }} # Use PR body as release description
           artifacts: ./dummy.txt
