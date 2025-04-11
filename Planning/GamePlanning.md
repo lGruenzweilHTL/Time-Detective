@@ -1,45 +1,34 @@
-# Game Design Questions
+## discussion
 
-## How often can you time travel?
-- Carryable device - as often as you want
-- Time travel contraption - only at fixed story points
+story game, **like pokemon**, sub-plots (cases for other clients), sub-plots can contribute to the main story but don't have to
+relationship system, stealth segments
 
-## How do we design the story?
-- Open world - explore world through space and time
-- Railroading - Puzzle-game style with fixed story
+### setting
 
-## How many cases?
-- Detective Agency - Player works for a Time-travel detective agency - multiple smaller cases - can choose cases
-- Story - One big case relevant to the Player's backstory
+old london
+time span of a few weeks/months past and future
+some clues are years back
 
-# Roles
+### time travelling
 
-## Programmer(s)
+time travel stations - each has a fixed travel point
+time travel coins - insert into stations (like in phone booths)
+stations can only go back in time
+stations can't go further than the time they were built (near the present)
 
-Leon
-Lukas
+1. insert coin
+2. cutscene - player dials number
+3. travel
 
-## Artist(s)
+### main character
 
-Matthias
-Erik
-Almir
+would kill people as a last resot
 
-## Story Writer(s)
+### story - the big plot
 
-Lukas
-Matthias
+an ordinary case turns huge
+mafia
 
-## Music
+### art style
 
-**TODO**
-
-
-# Programming Guidelines
-- Independent Systems
-- Use of Events
-- Clean Code
-- Singletons only for Managers
-- Single responsibility scripts
-- Use ScriptableObjects
-- Comments for hard to understand methods/features
+pixel art, top down
